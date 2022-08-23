@@ -1,0 +1,32 @@
+library(tidyverse)
+library(skimr)
+library(janitor)
+library(readr)
+
+## importing data 
+bookings_df <- read_csv("Desktop/hotel_bookings.csv")
+
+## inspecting the data
+head(bookings_df)
+skim_without_charts(bookings_df)
+
+## data cleaning
+## leave only 'hotel', 'is cancelled', 'lead_time' and rename the column
+trimmed_df <- bookings_df %>% 
+  select(hotel, is_canceled, lead_time) %>% 
+  rename(hotel_type = hotel)
+
+## combining arrival month and year to one column
+example_df <- bookings_df %>% 
+  select(arrival_date_year, arrival_date_month) %>% 
+  unite(arrival_month_year, c(arrival_date_month, arrival_date_year), sep = " ")
+
+## combining columns to get total number of guests
+example_df <- bookings_df %>% 
+  mutate(guests = adults + children + babies)
+
+## total number of canceled bookings and the average lead time for booking
+example_df <- bookings_df %>% 
+  summarize(canceled_number = sum(is_canceled),
+            average_lead_time = mean(lead_time))
+head(example_df)
