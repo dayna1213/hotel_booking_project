@@ -30,3 +30,20 @@ example_df <- bookings_df %>%
   summarize(canceled_number = sum(is_canceled),
             average_lead_time = mean(lead_time))
 head(example_df)
+
+## changing data
+## arranging bookings by most lead time
+bookings_df_v2 <- arrange(hotel_bookings, desc(lead_time))
+
+## filtering to get only city hotels and their the average lead time 
+bookings_city <- 
+  filter(bookings_df, bookings_df$hotel == 'City Hotel')
+mean(bookings_city$lead_time)
+
+## summarizing the data 
+hotel_summary <-
+  bookings_df %>% 
+  group_by(hotel) %>% 
+  summarize(average_lead_time = mean(lead_time),
+            min_lead_time = min(lead_time),
+            max_lead_time = max(lead_time))
