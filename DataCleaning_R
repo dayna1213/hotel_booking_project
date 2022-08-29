@@ -2,6 +2,7 @@ library(tidyverse)
 library(skimr)
 library(janitor)
 library(readr)
+library(ggplot2)
 
 ## importing data 
 bookings_df <- read_csv("Desktop/hotel_bookings.csv")
