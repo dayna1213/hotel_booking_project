@@ -47,3 +47,13 @@ hotel_summary <-
   summarize(average_lead_time = mean(lead_time),
             min_lead_time = min(lead_time),
             max_lead_time = max(lead_time))
+            
+## data visualization
+## testing if clients with children book earlier than clients without children
+ggplot(data = hotel_bookings) +
+  geom_point(mapping = aes(x = lead_time, y = children))
+
+## testing if clients with without children book the most weekend nights
+ggplot(data = hotel_bookings) + 
+  geom_point(mapping = aes(x = stays_in_weekend_nights, y = children))
+          
